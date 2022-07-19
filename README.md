@@ -3,7 +3,7 @@
 
 The input file in data folder!
 
-The assignment of Jupyter notebook for pricing model of a used car is [bank_marketing.17.Aykan.ipynb](bank_marketing.17.Aykan.ipynb).
+The assignment of Jupyter notebook for bank marketing campaign model is [bank_marketing.17.Aykan.ipynb](bank_marketing.17.Aykan.ipynb).
 
 
 # Getting Started
