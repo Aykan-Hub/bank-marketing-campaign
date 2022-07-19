@@ -111,6 +111,7 @@ These observations should be kept in the baseline calculation.
 
 ### Features
 Senior people after age 60 accept campaigns more, so do illiterate people, in contrast to that all professions seem to preserve the same ratio!
+
 ![](images/age.png)
 
 # Business Objective
@@ -122,7 +123,8 @@ Due to domestic competition and current financial crisis, there is a huge pressu
 Before we build our first model, we want to establish a baseline. What would be the baseline performance that our classifier should aim to beat?
 
 The distribution of target variable shows `89%` of observations is `No`, only `11`% is `Yes` shown in below plot: 
- ![](images/Acceptance of Marketing Campaign.png)
+
+![](images/Acceptance of Marketing Campaign.png)
 
 The baseline is **89%** by the target variables outlined in the count plot, the model should be better than this baseline! However, the [feature overlapping](#feature-overlapping) rate above indicates only 53% can be properly classified, 47% being arbitrarily due to feature overlapping. If we assume 50-50, best we can get is **`77%`** for this dataset as `baseline` versus simply rely on 89% by the target observations.
 
@@ -141,7 +143,8 @@ The score of Logistic Regression came out as 0.0 and fastest, SVM being the slow
 
 ## Dataset Allocation
 Since all features transformed to numeric representation, a correlation matrix can be checked since there are not many features in the dataset:
- ![](images/correlation matrix.png)
+
+![](images/correlation matrix.png)
 
 Per correlation matrix above, there are some strong correlation among these independendent variables which is indicating `multicollinearity` in the dataset:
  - `poutcome` strongly correlated with `pdays` (negative) and `previous` (positive)
@@ -196,7 +199,9 @@ Also, one more check to complete is feature importance, I ran that too:
 |	education|	-0.000128|
 
 Also, I ran L1 Regularization to see what features picked:
+
 ![](images/Increasing Regularization on Bank Marketing Campaign Features.png)
+
 Features `loan`, `housing`, `day_of_week` and `month` seem less important in this plot. `loan` and `day_of_week` features are also bottom 2 in the `permutation importance` list. Also, note `education` feature is second most important, so, I will not remove that feature.
 
 Further, After the feature engineering methods revealed bottom features, I removed `loan`, `housing`, and `day_of_week` columns and split dataset again. Beyond that, the multicollienarity check by Variance Inflation Factor (VIF) did not point out any features. Going with the scaled dataset after removing 3 less important features from the X dataset, namely: `'loan', 'housing', 'day_of_week'`
@@ -224,11 +229,13 @@ Each model fed with hyperparameter list to evaluate best outcome, they are captu
 |	Support Vector Machine|	55.611333|	0.746876|	0.750658|`{'C': 0.001, 'cache_size': 1000, 'gamma': 0.01, 'kernel': 'rbf'}`|
 
 ![](images/Logistic Regression.png)
+
 The logistic regression came out with a weaker `C` hyperparameter for regularization and chose `lbfgs` as solver and being fastest. KNN chose 13 neighbors and best estimator, followed by Decision Tree went with entropy more computationally heavy than gini but train time still less than KNN due to less hyperparameter combinations. Finally, Support Vector Machine came out as the worst performer in both time and score although it picked slightly smaller `gamma` which is higher dimension also higher bias and smaller variance by `C`.
 
 As shown in the confusion matrix, KNN has fewer misclassifications, and better area under the curve (AUC) below:
 
 ![](images/ROC Curve Display Results.png)
+
 As shown in Receiver Operating Characteristics curve, the performance of KNN and Decision Tree similar and similarly Logistic Regression and Support Vector Machines.
 
 # Next Steps
