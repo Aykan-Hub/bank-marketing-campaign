@@ -124,7 +124,7 @@ Before we build our first model, we want to establish a baseline. What would be 
 
 The distribution of target variable shows `89%` of observations is `No`, only `11`% is `Yes` shown in below plot: 
 
-![](images/Acceptance of Marketing Campaign.png)
+![](images/AcceptanceofMarketingCampaign.png)
 
 The baseline is **89%** by the target variables outlined in the count plot, the model should be better than this baseline! However, the [feature overlapping](#feature-overlapping) rate above indicates only 53% can be properly classified, 47% being arbitrarily due to feature overlapping. If we assume 50-50, best we can get is **`77%`** for this dataset as `baseline` versus simply rely on 89% by the target observations.
 
@@ -144,7 +144,7 @@ The score of Logistic Regression came out as 0.0 and fastest, SVM being the slow
 ## Dataset Allocation
 Since all features transformed to numeric representation, a correlation matrix can be checked since there are not many features in the dataset:
 
-![](images/correlation matrix.png)
+![](images/correlationmatrix.png)
 
 Per correlation matrix above, there are some strong correlation among these independendent variables which is indicating `multicollinearity` in the dataset:
  - `poutcome` strongly correlated with `pdays` (negative) and `previous` (positive)
@@ -200,7 +200,7 @@ Also, one more check to complete is feature importance, I ran that too:
 
 Also, I ran L1 Regularization to see what features picked:
 
-![](images/Increasing Regularization on Bank Marketing Campaign Features.png)
+![](images/IncreasingRegularizationonBankMarketingCampaignFeatures.png)
 
 Features `loan`, `housing`, `day_of_week` and `month` seem less important in this plot. `loan` and `day_of_week` features are also bottom 2 in the `permutation importance` list. Also, note `education` feature is second most important, so, I will not remove that feature.
 
@@ -228,13 +228,13 @@ Each model fed with hyperparameter list to evaluate best outcome, they are captu
 |	Decision Tree|	0.071775|	0.929373|	0.891593|`{'criterion': 'entropy', 'max_depth': 33, 'min_samples_leaf': 2, 'min_samples_split': 0.001}`|
 |	Support Vector Machine|	55.611333|	0.746876|	0.750658|`{'C': 0.001, 'cache_size': 1000, 'gamma': 0.01, 'kernel': 'rbf'}`|
 
-![](images/Logistic Regression.png)
+![](images/LogisticRegression.png)
 
 The logistic regression came out with a weaker `C` hyperparameter for regularization and chose `lbfgs` as solver and being fastest. KNN chose 13 neighbors and best estimator, followed by Decision Tree went with entropy more computationally heavy than gini but train time still less than KNN due to less hyperparameter combinations. Finally, Support Vector Machine came out as the worst performer in both time and score although it picked slightly smaller `gamma` which is higher dimension also higher bias and smaller variance by `C`.
 
 As shown in the confusion matrix, KNN has fewer misclassifications, and better area under the curve (AUC) below:
 
-![](images/ROC Curve Display Results.png)
+![](images/ROCCurveDisplayResults.png)
 
 As shown in Receiver Operating Characteristics curve, the performance of KNN and Decision Tree similar and similarly Logistic Regression and Support Vector Machines.
 
